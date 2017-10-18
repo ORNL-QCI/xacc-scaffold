@@ -40,6 +40,21 @@ namespace xacc {
 namespace quantum {
 
 ScaffoldCompiler::ScaffoldCompiler() {
+//	CI = std::make_shared<CompilerInstance>();
+//	CI->createDiagnostics(0, 0);
+//	TargetOptions targetOptions;
+//	targetOptions.Triple = llvm::sys::getDefaultTargetTriple();
+//	TargetInfo *pTargetInfo = TargetInfo::CreateTargetInfo(CI->getDiagnostics(),
+//			targetOptions);
+//	CI->setTarget(pTargetInfo);
+//	CI->createFileManager();
+//	CI->createSourceManager(CI->getFileManager());
+//	CI->createPreprocessor();
+//	CI->getPreprocessorOpts().UsePredefines = false;
+//	CI->createASTContext();
+}
+
+void ScaffoldCompiler::initialize() {
 	CI = std::make_shared<CompilerInstance>();
 	CI->createDiagnostics(0, 0);
 	TargetOptions targetOptions;
@@ -56,6 +71,8 @@ ScaffoldCompiler::ScaffoldCompiler() {
 
 std::shared_ptr<IR> ScaffoldCompiler::compile(const std::string& src,
 		std::shared_ptr<Accelerator> acc) {
+
+	initialize();
 
 	// Set the Kernel Source code
 	kernelSource = src;
@@ -135,6 +152,7 @@ std::shared_ptr<IR> ScaffoldCompiler::compile(const std::string& src,
 
 std::shared_ptr<IR> ScaffoldCompiler::compile(const std::string& src) {
 
+	initialize();
 	kernelSource = src;
 
 	// Replace the __qpu__ attribute with module

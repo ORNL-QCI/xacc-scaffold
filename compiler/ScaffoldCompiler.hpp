@@ -102,6 +102,8 @@ public:
 
 protected:
 
+	void initialize();
+
 	/**
 	 * Reference to the Scaffold Clang Compiler
 	 */
