@@ -146,8 +146,10 @@ std::shared_ptr<IR> ScaffoldCompiler::compile(const std::string& src,
 	clang::ParseAST(CI->getPreprocessor(), consumer.get(), CI->getASTContext());
 
 	// Get the IR Function representation
-	return consumer->getIR();
+	auto ir = consumer->getIR();
+	std::remove(".tmpSrcFile2.scaffold");
 
+	return ir;
 }
 
 std::shared_ptr<IR> ScaffoldCompiler::compile(const std::string& src) {
