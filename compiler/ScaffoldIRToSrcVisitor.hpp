@@ -93,6 +93,12 @@ public:
 		baseInstruction("H", h.bits());
 	}
 
+	void visit(Identity& i) {}
+	
+	void visit(CZ& cz) {
+		baseInstruction("CZ", cz.bits());
+	}
+	
 	/**
 	 * Visit CNOT gates
 	 */
